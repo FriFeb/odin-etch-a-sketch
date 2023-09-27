@@ -27,3 +27,10 @@ for (let i = 0; i < gridSize; i++) {
     container.appendChild(div);
   }
 }
+
+container.addEventListener("mouseover", (e) => {
+  if (e.target.className !== "grid-element") return;
+  console.log(e.target);
+
+  e.target.classList.add("bg-dark");
+});
