@@ -15,13 +15,15 @@ continue until iterations are over (rowSize < 16)
 
 const gridSize = 32;
 const containerSize = 960;
+let isRandomTrailColor = false;
 
-const squaresBtn = document.querySelector(".menu > button");
+const squaresBtn = document.querySelector(".squares");
+const randomColorBtb = document.querySelector(".random-color");
 const container = document.querySelector(".container");
 container.style.width = container.style.height = containerSize + "px";
 
 function renderGrid(gridSize) {
-  container.innerHTML = '';
+  container.innerHTML = "";
 
   for (let i = 0; i < gridSize; i++) {
     for (let j = 0; j < gridSize; j++) {
@@ -48,8 +50,20 @@ squaresBtn.addEventListener("click", (e) => {
   renderGrid(squareAmount);
 });
 
-container.addEventListener("mouseover", (e) => {
-  if (e.target.className !== "grid-element") return;
+randomColorBtb.addEventListener('click', () => {
+  isRandomTrailColor = !isRandomTrailColor;
+})
 
-  if (e.buttons === 1) e.target.classList.add("bg-dark");
+container.addEventListener("mouseover", (e) => {
+  if (e.target.className !== "grid-element" || e.target.style.backgroundColor !== '') return;
+
+  if (isRandomTrailColor && e.buttons === 1) {
+    const red = Math.floor(Math.random() * 255 + 1);
+    const green = Math.floor(Math.random() * 255 + 1);
+    const blue = Math.floor(Math.random() * 255 + 1);
+
+    e.target.style.backgroundColor = `rgb(${red},${green},${blue})`;
+  } else if (e.buttons === 1) {
+    e.target.classList.add("bg-dark");
+  }
 });
