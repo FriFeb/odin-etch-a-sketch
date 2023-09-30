@@ -7,10 +7,22 @@ body {
   background-color: rgb(200, 200, 200);
 }
 
+.menu {
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+}
+
+.menu > button {
+  font-size: 24px;
+  padding: 1rem;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
   background-color: rgb(255, 255, 255);
+  margin: auto;
 }
 
 .grid-element {
@@ -20,5 +32,4 @@ body {
 
 .bg-dark {
   background-color: hsl(0, 0%, 0%);
-
 }
