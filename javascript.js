@@ -13,20 +13,40 @@ go into a loop:
 continue until iterations are over (rowSize < 16)
 */
 
-const gridSize = 16;
+const gridSize = 32;
 const containerSize = 960;
 
+const squaresBtn = document.querySelector(".menu > button");
 const container = document.querySelector(".container");
 container.style.width = container.style.height = containerSize + "px";
 
-for (let i = 0; i < gridSize; i++) {
-  for (let j = 0; j < gridSize; j++) {
-    const div = document.createElement("div");
-    div.className = "grid-element";
-    div.style.width = div.style.height = containerSize / gridSize + "px";
-    container.appendChild(div);
+function renderGrid(gridSize) {
+  container.innerHTML = '';
+
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      const div = document.createElement("div");
+      div.className = "grid-element";
+      div.style.width = div.style.height = containerSize / gridSize + "px";
+      container.appendChild(div);
+    }
   }
 }
+
+renderGrid(gridSize);
+
+squaresBtn.addEventListener("click", (e) => {
+  let squareAmount;
+
+  do {
+    squareAmount = +prompt(
+      "Enter amount of squares (should be divisible by 2)",
+      "32"
+    );
+  } while (squareAmount <= 0 || squareAmount > 100 || squareAmount % 2 !== 0);
+
+  renderGrid(squareAmount);
+});
 
 container.addEventListener("mouseover", (e) => {
   if (e.target.className !== "grid-element") return;
